@@ -6,7 +6,7 @@
     <div v-if="startFlg">
       <div class="question">{{ current_question }}</div>
       <div v-if="current_question_counts == question_counts" class="clear">Clear!</div>
-      <input v-model="typeBox" type="text" class="">
+      <input id="typeForm" v-model="typeBox" type="text" class="">
       <div class="gaugeWrapper">
         <div :style="styleObject()" class="gauge"></div>
       </div>
@@ -16,7 +16,7 @@
 </template>
 
 <script setup>
-import { onMounted, ref, watch } from 'vue'
+import { onMounted, ref, watch, nextTick } from 'vue'  // Note: Imported nextTick from 'vue'
 const startFlg = ref(false); // 問題開始ステータス
 const current_question = ref(''); // 現在のタイプ文字
 const typeBox = ref('');
@@ -24,7 +24,6 @@ const current_question_counts = ref(0); // 現在の質問値
 const question_counts = ref(0); // 質問数
 const styleObject = () => {
   const width = 20 * current_question_counts.value + "%";
-  
   const color = (() => {
     if (current_question_counts.value >= 5) {
       return "#03a9f4";
@@ -63,12 +62,12 @@ watch(typeBox, (newValue) => {
   }
 });
 
-
 const gameStart = () => {
   startFlg.value = true;
-  console.log(startFlg.value);
+  nextTick(() => {  // Note: Use nextTick directly instead of typeForm.$nextTick
+    document.getElementById('typeForm').focus();
+  })
 }
-
 </script>
 
 <style scoped>
@@ -76,6 +75,7 @@ const gameStart = () => {
   border: 1px solid #000;
   .gauge {
     height: 12px;
+    transition: all .3s ease;
   }
 }
 </style>
