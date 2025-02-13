@@ -25,17 +25,19 @@ const questions = [
   'orange',
   'grape',
   'cherry',
-  'pear',
-  'pineapple'
+  'pear'
 ];
 
 onMounted(() => {
-  current_question.value = questions[2]
+  current_question.value = questions[0];
 })
 
 watch(typeBox, (newValue) => {
   if (newValue === current_question.value) {
-    alert("一致した!");
+    questions.splice(0, 1); // 配列の0番目を1つ削除
+    current_question.value = questions[0]; // 再定義
+    typeBox.value = "";
+    // console.log(current_question.value);
   }
 });
 
