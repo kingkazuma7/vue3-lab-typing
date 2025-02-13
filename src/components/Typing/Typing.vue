@@ -7,7 +7,9 @@
       <div class="question">{{ current_question }}</div>
       <div v-if="current_question_counts == question_counts" class="clear">Clear!</div>
       <input v-model="typeBox" type="text" class="">
-      <div class="gauge"></div>
+      <div class="gaugeWrapper">
+        <div :style="styleObject()" class="gauge"></div>
+      </div>
       <div>{{ current_question_counts }}/{{ question_counts }}</div>
     </div>
   </div>
@@ -20,14 +22,29 @@ const current_question = ref(''); // 現在のタイプ文字
 const typeBox = ref('');
 const current_question_counts = ref(0); // 現在の質問値
 const question_counts = ref(0); // 質問数
+const styleObject = () => {
+  const width = 20 * current_question_counts.value + "%";
+  
+  const color = (() => {
+    if (current_question_counts.value >= 5) {
+      return "#03a9f4";
+    } else {
+      return "orange";
+    }
+  })();
+
+  return {
+    'width': width,
+    'background-color': color
+  }
+}
 
 const questions = [
   'apple',
   'banana',
   'orange',
   'grape',
-  'cherry',
-  'pear'
+  'cherry'
 ];
 
 onMounted(() => {
@@ -55,4 +72,10 @@ const gameStart = () => {
 </script>
 
 <style scoped>
+.gaugeWrapper {
+  border: 1px solid #000;
+  .gauge {
+    height: 12px;
+  }
+}
 </style>
