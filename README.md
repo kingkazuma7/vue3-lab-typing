@@ -1,29 +1,19 @@
-# vue3-lab
+# タイピングゲーム
 
-This template should help get you started developing with Vue 3 in Vite.
+## 状態遷移
+- 開始前 → ゲーム進行中：スタートボタンクリックでゲームが開始
+- 入力処理中：ユーザーの入力をリアルタイムで監視し、正誤判定を行う
+- プログレス管理：進捗に応じてゲージの色と幅を動的に更新
+- クリア判定：全問題が完了したら「Clear!」を表示
 
-## Recommended IDE Setup
+## 機能
+- `ref()`で状態管理を行い、リアクティブなデータを作成
+- `watch`で入力値の変更を監視し、正誤判定
+- `nextTick`でDOM更新後にフォーカスを設定
+- プログレスゲージの色は進捗に応じて変化
 
-[VSCode](https://code.visualstudio.com/) + [Volar](https://marketplace.visualstudio.com/items?itemName=Vue.volar) (and disable Vetur).
-
-## Customize configuration
-
-See [Vite Configuration Reference](https://vite.dev/config/).
-
-## Project Setup
-
-```sh
-npm install
-```
-
-### Compile and Hot-Reload for Development
-
-```sh
-npm run dev
-```
-
-### Compile and Minify for Production
-
-```sh
-npm run build
-```
+## コミット
+- fix：バグ修正
+- add：新規（ファイル）機能追加
+- update：機能修正（バグではない）
+- remove：削除（ファイル）
