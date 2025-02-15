@@ -18,6 +18,8 @@
 
 <script setup>
 import { onMounted, ref, watch, nextTick, onUnmounted } from 'vue'  // Note: Imported nextTick from 'vue'
+import { questions } from '@js/questions.js'; // Add this line to import 'questions.js' module
+
 const startFlg = ref(false); // 問題開始ステータス
 const current_question = ref(''); // 現在のタイプ文字
 const typeBox = ref('');
@@ -44,14 +46,6 @@ const styleObject = () => {
     'background-color': color
   }
 }
-
-const questions = [
-  'apple',
-  'banana',
-  'orange',
-  'grape',
-  'cherry'
-];
 
 // タイマーを開始する関数
 const startTimer = () => {
