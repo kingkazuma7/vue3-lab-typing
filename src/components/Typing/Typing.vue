@@ -4,7 +4,9 @@
     <button v-if="startFlg != true" @click="gameStart()">スタート</button>
     <!-- trueのときのみ問題分を表示 -->
     <div v-if="startFlg">
-      <div>残り時間: {{ remainingTime }}</div>
+      <div class="timer" :data-time="remainingTime <= 10 ? 'low' : ''">
+        残り時間: {{ remainingTime }}秒
+      </div>
       <div class="question">{{ current_question }}</div>
       <div v-if="current_question_counts == question_counts" class="clear">Clear!</div>
       <input id="typeForm" v-model="typeBox" type="text" class="">
@@ -48,5 +50,20 @@ onMounted(() => {
 .gauge {
   height: 12px;
   transition: all .3s ease;
+}
+.timer {
+  font-size: 1.2em;
+  font-weight: bold;
+  margin: 10px 0;
+  color: #333;
+}
+.timer[data-time="low"] {
+  color: red;
+  animation: blink 1s infinite;
+}
+@keyframes blink {
+  0% { opacity: 1; }
+  50% { opacity: 0.5; }
+  100% { opacity: 1; }
 }
 </style>
